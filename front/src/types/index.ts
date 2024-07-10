@@ -14,3 +14,15 @@ export type Credentials = {
 export type Cart = {
   [productId: number]: number;
 };
+
+export type Product = {
+  id: number;
+  name: string;
+  price: number;
+  imageName: string;
+  stockId: number;
+  createdAt: string;
+  updatedAt: string;
+  quantity: number;
+  lastOrderedAt?: string;
+};
