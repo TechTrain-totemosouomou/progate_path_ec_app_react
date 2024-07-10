@@ -1,0 +1,49 @@
+{
+  "name": "ec_app",
+  "scripts": {
+    "start:api": "npm run watch -w api",
+    "start:front": "npm run start -w front",
+    "db:migrate": "npm run db:migrate -w api",
+    "db:migrate:test": "npm run db:migrate:test -w api",
+    "db:seed": "npm run db seed -w api",
+    "db:reset": "npm run db:reset -w api",
+    "test:api": "npm run test -w api",
+    "test:api:search_products": "npm run test:search_products -w api",
+    "test:api:get_products": "npm run test:get_products -w api",
+    "test:api:create_order": "npm run test:create_order -w api",
+    "test:api:get_order": "npm run test:get_order -w api",
+    "test:api:get_orders": "npm run test:get_orders -w api",
+    "test:e2e": "npm run test -w e2e",
+    "test:e2e:search": "npm run test:search -w e2e",
+    "test:e2e:cart": "npm run test:cart -w e2e",
+    "test:e2e:order": "npm run test:order -w e2e",
+    "test:e2e:orders": "npm run test:orders -w e2e",
+    "lint:check": "npm run lint:check --ws",
+    "lint:fix": "npm run lint:fix --ws",
+    "format:check": "npm run format:check --ws",
+    "format:fix": "npm run format:fix --ws",
+    "typecheck": "npm run typecheck --ws",
+    "check_puppeteer": "npm run check_puppeteer -w e2e"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "dotenv-cli": "^7.4.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.5"
+  },
+  "overrides": {
+    "glob": "10.3.16"
+  },
+  "workspaces": [
+    "api",
+    "front",
+    "e2e"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "front",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "start:test": "NODE_ENV=test vite -l silent --host",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check './**/*.{ts,tsx,js,jsx}'",
+    "format:fix": "prettier --write './**/*.{ts,tsx,js,jsx}'",
+    "typecheck": "tsc --noEmit --skipLibCheck --project tsconfig.json"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.37.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-error-boundary": "^4.0.13",
+    "react-router-dom": "^6.23.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react-swc": "^3.7.0",
+    "autoprefixer": "^10.4.19",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "vite": "^5.2.11"
+  }
+}
