@@ -12,6 +12,15 @@ type UseProductSearchReturnType = {
   itemsPerPage: number;
 };
 
+const convertToLocalTime = (isoDateString?: string): string => {
+  if (!isoDateString) return "";
+  const date = new Date(isoDateString);
+  const formattedDate = `${date.getFullYear()}/${
+    date.getMonth() + 1
+  }/${date.getDate()}`;
+  return formattedDate;
+};
+
 const useProductSearch = (): UseProductSearchReturnType => {
   const [products, setProducts] = useState<Product[]>([]);
   const [hitCount, setHitCount] = useState<number>(0);
@@ -35,15 +44,7 @@ const useProductSearch = (): UseProductSearchReturnType => {
         }
         const data = await response.json();
 
-        const convertToLocalTime = (isoDateString?: string): string => {
-          if (!isoDateString) return "";
-          const date = new Date(isoDateString);
-          const formattedDate = `${date.getFullYear()}/${
-            date.getMonth() + 1
-          }/${date.getDate()}`;
-          return formattedDate;
-        };
-
+        // convertToLocalTime 関数を利用して日時を変換する
         const productsWithLocalTime: Product[] = data.products.map(
           (product: Product) => ({
             ...product,
@@ -85,3 +86,4 @@ const useProductSearch = (): UseProductSearchReturnType => {
 };
 
 export default useProductSearch;
+export {convertToLocalTime}; // convertToLocalTime を外部からインポート可能にする

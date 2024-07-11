@@ -4,6 +4,7 @@ import {Layout} from "@/components/layout";
 import {RequireAuth} from "@/components/require_auth";
 import {LoginPage} from "@/pages/login";
 import {SearchPage} from "@/pages/search";
+import {CartPage} from "@/pages/cart";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <SearchPage />,
+          },
+          {
+            path: "cart",
+            element: <CartPage />,
           },
         ],
       },

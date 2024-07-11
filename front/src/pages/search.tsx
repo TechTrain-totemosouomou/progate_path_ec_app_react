@@ -1,7 +1,8 @@
 import {Loading} from "../components/loading";
 import SearchForm from "../components/SearchForm";
 import useProductSearch from "../hooks/useProductSearch";
-import {Product} from "../types";
+import {useCart} from "../context/CartContext";
+import ProductList from "../components/ProductList";
 
 export function SearchPage(): JSX.Element {
   const {
@@ -14,45 +15,28 @@ export function SearchPage(): JSX.Element {
     itemsPerPage,
   } = useProductSearch();
 
-  const filteredProducts = products;
+  const {updateCart, cart} = useCart();
+
+  const handleQuantityChange = (productId: number, quantity: number) => {
+    updateCart(productId, quantity);
+  };
+
+  const handleSearch = (filter: string) => {
+    setSearchParams({filter});
+  };
 
   return (
     <div>
-      <SearchForm onSearch={filter => setSearchParams({filter})} />
+      <SearchForm onSearch={handleSearch} />
 
       {loading ? (
         <Loading />
       ) : (
-        <div data-test="product-list">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product: Product) => (
-              <div key={product.id} data-test={`product-item-${product.id}`}>
-                <img
-                  data-test="product-image"
-                  src={`/image/${product.imageName}`}
-                  alt={product.name}
-                />
-                <div data-test="search page product info">
-                  <h2 data-test="product-name">{product.name}</h2>
-                  <p data-test="product-price">Price: ${product.price}</p>
-                  <p>Stock: {product.quantity}</p>
-                  <p data-test="product-last-ordered-at">
-                    last order: {product.lastOrderedAt}
-                  </p>
-                  <input
-                    type="number"
-                    min="0"
-                    max={product.quantity}
-                    defaultValue={product.quantity > 0 ? "0" : "0"}
-                    disabled={product.quantity === 0}
-                  />
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No products found.</p>
-          )}
-        </div>
+        <ProductList
+          products={products}
+          cart={cart}
+          onQuantityChange={handleQuantityChange}
+        />
       )}
 
       <div>

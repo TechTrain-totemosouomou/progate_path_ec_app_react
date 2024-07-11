@@ -3,6 +3,7 @@ import {Link, Navigate, Outlet} from "react-router-dom";
 import {useMutation} from "@tanstack/react-query";
 import {logout} from "@/api/auth";
 import {useCurrentUser} from "@/hooks/current_user";
+import {useCart} from "@/context/CartContext";
 import {User} from "@/types";
 
 export function RequireAuth(): JSX.Element {
@@ -31,6 +32,9 @@ function Header({currentUser}: {currentUser: User}): JSX.Element {
     },
   });
 
+  const {cart} = useCart();
+  const totalCartItems = Object.values(cart).reduce((acc, qty) => acc + qty, 0);
+
   return (
     <div className="flex flex-row p-4 justify-between items-center bg-violet-600">
       <Link className="text-2xl text-white" to="/">
@@ -44,6 +48,9 @@ function Header({currentUser}: {currentUser: User}): JSX.Element {
         <button className="text-white" onClick={() => mutation.mutate()}>
           Logout
         </button>
+        <Link className="text-white" to="/cart" data-test="link-to-cart">
+          Cart {totalCartItems}
+        </Link>
       </div>
     </div>
   );
