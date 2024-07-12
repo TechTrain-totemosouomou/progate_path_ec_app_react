@@ -5,6 +5,7 @@ import {RequireAuth} from "@/components/require_auth";
 import {LoginPage} from "@/pages/login";
 import {SearchPage} from "@/pages/search";
 import {CartPage} from "@/pages/cart";
+import {OrderCompletePage} from "@/pages/orderComplete";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
           {
             path: "cart",
             element: <CartPage />,
+          },
+          {
+            path: "orders/:id/complete",
+            element: <OrderCompletePage />,
           },
         ],
       },

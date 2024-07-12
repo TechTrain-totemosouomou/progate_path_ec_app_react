@@ -9,6 +9,7 @@ import React, {
 type CartContextType = {
   cart: {[productId: number]: number};
   updateCart: (productId: number, quantity: number) => void;
+  clearCart: () => void;
 };
 
 const CART_STORAGE_KEY = "cart_data";
@@ -33,12 +34,17 @@ export const CartProvider: React.FC<{children: ReactNode}> = ({children}) => {
     });
   };
 
+  const clearCart = () => {
+    setCart({});
+    sessionStorage.removeItem(CART_STORAGE_KEY);
+  };
+
   useEffect(() => {
     sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
   }, [cart]);
 
   return (
-    <CartContext.Provider value={{cart, updateCart}}>
+    <CartContext.Provider value={{cart, updateCart, clearCart}}>
       {children}
     </CartContext.Provider>
   );
