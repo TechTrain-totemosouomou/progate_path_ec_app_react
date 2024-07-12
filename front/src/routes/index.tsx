@@ -6,6 +6,7 @@ import {LoginPage} from "@/pages/login";
 import {SearchPage} from "@/pages/search";
 import {CartPage} from "@/pages/cart";
 import {OrderCompletePage} from "@/pages/orderComplete";
+import {OrderPage} from "@/pages/orders";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
           {
             path: "orders/:id/complete",
             element: <OrderCompletePage />,
+          },
+          {
+            path: "orders",
+            element: <OrderPage />,
           },
         ],
       },

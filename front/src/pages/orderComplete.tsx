@@ -2,33 +2,8 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {Loading} from "../components/loading";
 import {convertToLocalTime} from "../hooks/useProductSearch";
-
-interface OrderDetail {
-  id: number;
-  productId: number;
-  orderId: number;
-  price: number;
-  quantity: number;
-  createdAt: string;
-  updatedAt: string;
-  product: {
-    id: number;
-    name: string;
-    price: number;
-    imageName: string;
-    stockId: number;
-    createdAt: string;
-    updatedAt: string;
-  };
-}
-
-interface Order {
-  id: number;
-  userId: number;
-  createdAt: string;
-  updatedAt: string;
-  orderDetails: OrderDetail[];
-}
+import {Order} from "../types";
+import OrderList from "../components/OrderList";
 
 export function OrderCompletePage(): JSX.Element | null {
   const {id} = useParams<{id: string}>();
@@ -94,24 +69,7 @@ export function OrderCompletePage(): JSX.Element | null {
         </p>
         <p data-test="order-total-price">Total price: {totalPrice} coins</p>
         <p data-test="order-total-quantity">Total quantity: {totalQuantity}</p>
-        <div>
-          {order.orderDetails.map(item => (
-            <div key={item.id} data-test="order-detail-item">
-              <img
-                data-test="order-detail-image"
-                src={`/image/${item.product.imageName}`}
-                alt={item.product.name}
-              />
-              <div>
-                <h2 data-test="order-detail-name">{item.product.name}</h2>
-                <p data-test="order-detail-price">price: {item.price} coins</p>
-                <p data-test="order-detail-quantity">
-                  quantity: {item.quantity}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <OrderList orderDetails={order.orderDetails} />
       </div>
     </div>
   );

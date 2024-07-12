@@ -48,6 +48,9 @@ function Header({currentUser}: {currentUser: User}): JSX.Element {
         <button className="text-white" onClick={() => mutation.mutate()}>
           Logout
         </button>
+        <Link className="text-white" to="/orders" data-test="link-to-orders">
+          Orders
+        </Link>
         <Link className="text-white" to="/cart" data-test="link-to-cart">
           Cart {totalCartItems}
         </Link>
